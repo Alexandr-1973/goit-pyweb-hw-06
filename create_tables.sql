@@ -1,0 +1,33 @@
+CREATE TABLE groups (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+group_name VARCHAR(30)
+);
+CREATE TABLE students (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+student_name VARCHAR(50),
+group_id INTEGER,
+FOREIGN KEY (group_id) REFERENCES groups (id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+CREATE TABLE teachers (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+teacher_name VARCHAR(50)
+);
+CREATE TABLE subjects (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+subject_title VARCHAR(50),
+teacher_id INTEGER,
+FOREIGN KEY (teacher_id) REFERENCES teachers (id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+CREATE TABLE grades (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+grade INTEGER,
+student_id INTEGER,
+subject_id INTEGER,
+created_at DATE DEFAULT CURRENT_DATE,
+FOREIGN KEY (student_id) REFERENCES students (id),
+FOREIGN KEY (subject_id) REFERENCES subjects (id)
+);
