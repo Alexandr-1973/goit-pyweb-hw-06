@@ -9,10 +9,9 @@ NUMBER_TEACHERS = 5
 NUMBER_GRADES = 20
 NUMBER_SUBJECTS = 8
 GRADES_PERIOD=90
-random_subjects_list = [
+subjects_list = [
     "Mathematics", "Physics", "Chemistry", "Biology", "History",
-    "Literature", "Geography", "Computer Science", "English",
-    "Philosophy", "Economics", "Law"
+    "Literature", "Geography", "Computer Science"
 ]
 
 fake=faker.Faker()
@@ -32,7 +31,7 @@ fill_dict={
     "teachers":{"sql":"""INSERT INTO teachers(teacher_name)
                                VALUES (?)""", "data":[(fake.name()[:50],) for _ in range(NUMBER_TEACHERS)]},
     "subjects":{"sql":"""INSERT INTO subjects(subject_title, teacher_id)
-                                VALUES (?,?)""", "data":[(choice(random_subjects_list), next(teacher_cycle)) for _ in range(NUMBER_SUBJECTS)]},
+                                VALUES (?,?)""", "data":[(subjects_list[i], next(teacher_cycle)) for i in range(NUMBER_SUBJECTS)]},
     "grades":{"sql":"""INSERT INTO grades(grade, student_id, subject_id, created_at)
                                 VALUES (?,?,?,?)""", "data":grades_data},
 }
