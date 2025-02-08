@@ -3,4 +3,4 @@ FROM students s
 JOIN grades g ON g.student_id = s.id
 JOIN subjects s2 ON g.subject_id = s2.id
 JOIN teachers t ON s2.teacher_id = t.id
-WHERE s.student_name = ? and t.teacher_name = ?
+WHERE t.teacher_name=? and s.student_name=?
